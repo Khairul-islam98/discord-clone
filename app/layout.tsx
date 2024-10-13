@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import {Open_Sans} from "next/font/google"
+import { Open_Sans } from "next/font/google";
 
-const font = Open_Sans({subsets: ["latin"]})
+import { ClerkProvider } from "@clerk/nextjs";
+
+const font = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Chat App",
@@ -16,12 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={font.className}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={font.className}>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }
