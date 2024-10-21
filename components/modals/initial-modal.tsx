@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input"; 
 import { Button } from "../ui/button";
+import { FileUpload } from "../file-upload";
 
 
 
@@ -57,11 +58,11 @@ export const InitialModal = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      {/* <FileUpload
+                       <FileUpload
                         endpoint="serverImage"
                         value={field.value}
                         onChange={field.onChange}
-                      /> */}
+                      /> 
                     </FormControl>
                   </FormItem>
                 )}
