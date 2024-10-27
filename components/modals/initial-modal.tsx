@@ -3,12 +3,15 @@
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import axios from "axios";  
+
 import { useForm } from "react-hook-form";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input"; 
 import { Button } from "../ui/button";
 import { FileUpload } from "../file-upload";
+import { useRouter } from "next/navigation";
 
 
 
@@ -29,11 +32,20 @@ export const InitialModal = () => {
       imageUrl: "",
     },
   });
+  const router = useRouter();
 
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    try{
+      await axios.post("/api/servers", values);
+      form.reset();
+      router.refresh()
+      window.location.reload()
+
+    }catch(error){
+      console.error(error);
+    }
   };
 
   return (
