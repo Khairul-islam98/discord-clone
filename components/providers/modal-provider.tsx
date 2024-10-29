@@ -6,7 +6,7 @@ import { CreateServerModal } from "../modals/create-server-modal";
 
 
 export const ModalProvider = () => {
-    const [isMounted, setIsMounted] = useState(false);
+    const [isMounted, setIsMounted] = useState(true);
 
     useEffect(() => {
         setIsMounted(true);

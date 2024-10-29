@@ -25,6 +25,7 @@ const formSchema = z.object({
 });
 
 export const InitialModal = () => {
+  
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -74,6 +75,7 @@ export const InitialModal = () => {
                         endpoint="serverImage"
                         value={field.value}
                         onChange={field.onChange}
+                        
                       /> 
                     </FormControl>
                   </FormItem>
