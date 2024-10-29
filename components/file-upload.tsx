@@ -4,8 +4,10 @@
 import { X } from "lucide-react";
 import Image from "next/image";
 
-import { UploadDropzone } from "@/lib/uploadthing";
-import "@uploadthing/react/styles.css"
+import { UploadButton } from "@/lib/uploadthing";
+
+
+
 interface FileUploadProps {
     onChange: (url?: string) => void;
     value: string;
@@ -24,7 +26,7 @@ export const FileUpload = ({
                 <Image
                 fill
                 src={value}
-                alt="Uploar"
+                alt="Upload"
                 className="rounded-full"
                 />
                 <button
@@ -38,7 +40,14 @@ export const FileUpload = ({
         )
     }
     return (
-       <UploadDropzone 
+       <UploadButton
+       appearance={{
+        button:
+          "ut-ready:bg-green-500 ut-uploading:cursor-not-allowed rounded-r-none bg-red-500 bg-none after:bg-orange-400",
+        container: "w-max flex-row rounded-md border-cyan-300 bg-slate-800",
+        allowedContent:
+          "flex h-8 flex-col items-center justify-center px-2 text-white",
+      }}
         endpoint={endpoint}
         onClientUploadComplete={(res) => {
             onChange(res?.[0].url)
@@ -46,6 +55,7 @@ export const FileUpload = ({
         onUploadError={(error: Error) => {
             console.log(error);
         }}
+        
        />
     );
 };
