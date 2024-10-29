@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { FileUpload } from "../file-upload";
 import { useRouter } from "next/navigation";
+import { useModal } from "@/hooks/use-modal-store";
 
 
 
@@ -25,6 +26,9 @@ const formSchema = z.object({
 });
 
 export const CreateServerModal = () => {
+  const {isOpen, onClose, type} = useModal();
+
+  const isModelOpen = isOpen && type === "createServer";
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,15 +45,19 @@ export const CreateServerModal = () => {
       await axios.post("/api/servers", values);
       form.reset();
       router.refresh()
-      window.location.reload()
 
     }catch(error){
       console.error(error);
     }
   };
 
+  const handleClose = () => {
+    form.reset();
+    onClose(); 
+  }
+
   return (
-    <Dialog open>
+    <Dialog open={isModelOpen} onOpenChange={handleClose}>
     <DialogContent className="bg-white text-black p-0 overflow-hidden">
       <DialogHeader className="pt-8 px-6">
         <DialogTitle className="text-2xl text-center font-bold">
