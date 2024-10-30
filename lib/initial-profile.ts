@@ -5,7 +5,7 @@ import { RedirectToSignIn } from "@clerk/nextjs";
 export const initialProfile = async () => {
   const user = await currentUser();
   if (!user) {
-    return RedirectToSignIn({ redirectUrl: "/" });
+    return RedirectToSignIn({ redirectUrl: "/sign-in" });
   }
 
   const profile = await db.profile.findUnique({
