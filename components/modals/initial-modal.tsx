@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { FileUpload } from "../file-upload";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 
 
@@ -25,6 +26,7 @@ const formSchema = z.object({
 });
 
 export const InitialModal = () => {
+  const [isMounted, setIsMounted] = useState(false);
   
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -48,6 +50,12 @@ export const InitialModal = () => {
       console.error(error);
     }
   };
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
+
 
   return (
     <Dialog open>
