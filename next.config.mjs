@@ -32,6 +32,10 @@ const nextConfig = {
                 hostname: "**", // This allows all HTTPS hosts
             },
         ],
+        
+            domains: ["uploadthing.com"]
+        
+      
     },
 };
 
