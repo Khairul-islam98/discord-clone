@@ -51,7 +51,9 @@ export const EmojiPopover = ({
           </TooltipContent>
         </Tooltip>
         <PopoverContent
-        className="p-0 w-full border-none shadow-none"
+        side="right"
+        sideOffset={40}
+        className="bg-transparent border-none shadow-none drop-shadow-none mb-16"
         >
             <EmojiPicker onEmojiClick={onSelect} />
         </PopoverContent>

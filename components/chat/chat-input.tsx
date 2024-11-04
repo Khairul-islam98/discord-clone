@@ -51,7 +51,6 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
     form.setValue("content", form.getValues("content") + emoji);
   };
 
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -64,7 +63,7 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
                 <div className=" relative p-4 pb-6">
                   <button
                     type="button"
-                    onClick={() => onOpen("messageFile", {apiUrl, query})}
+                    onClick={() => onOpen("messageFile", { apiUrl, query })}
                     className=" absolute top-7 left-8 h-[24px] w-[24px] bg-zinc-500 dark:bg-zinc-400 hover:bg-zinc-600 dark:hover:bg-zinc-300 transition rounded-full p-1 flex items-center justify-center"
                   >
                     <Plus className=" text-white dark:text-[#313338]" />
@@ -78,8 +77,11 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
                     {...field}
                   />
                   <div className=" absolute top-7 right-8">
-                    <EmojiPopover onEmojiSelect={onEmojiSelect} hint="Add reaction">
-                      <Smile className=" text-zinc-600 dark:text-zinc-200" />
+                    <EmojiPopover
+                      onEmojiSelect={onEmojiSelect}
+                      hint="Add reaction"
+                    >
+                      <Smile className=" text-zinc-500 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition hover:cursor-pointer" />
                     </EmojiPopover>
                   </div>
                 </div>
