@@ -14,6 +14,7 @@ import { Plus, Smile } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
 import EmojiPicker from "emoji-picker-react";
 import { EmojiPopover } from "../emoji-popover";
+import { useRouter } from "next/navigation";
 
 interface ChatInputProps {
   apiUrl: string;
@@ -28,6 +29,7 @@ const formSchema = z.object({
 
 export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
   const { onOpen } = useModal();
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,6 +44,8 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
         query,
       });
       await axios.post(url, value);
+      form.reset();
+      router.refresh()
     } catch (error) {
       console.error(error);
     }
