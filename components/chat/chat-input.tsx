@@ -12,6 +12,8 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Plus, Smile } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
+import EmojiPicker from "emoji-picker-react";
+import { EmojiPopover } from "../emoji-popover";
 
 interface ChatInputProps {
   apiUrl: string;
@@ -44,6 +46,12 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
       console.error(error);
     }
   };
+
+  const onEmojiSelect = (emoji: string) => {
+    form.setValue("content", form.getValues("content") + emoji);
+  };
+
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -70,7 +78,9 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
                     {...field}
                   />
                   <div className=" absolute top-7 right-8">
-                    <Smile />
+                    <EmojiPopover onEmojiSelect={onEmojiSelect} hint="Add reaction">
+                      <Smile className=" text-zinc-600 dark:text-zinc-200" />
+                    </EmojiPopover>
                   </div>
                 </div>
               </FormControl>
