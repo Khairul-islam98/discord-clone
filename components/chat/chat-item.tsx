@@ -66,7 +66,6 @@ export const ChatItem = ({
     const [fileType, setFileType] = useState("");
     const [isMounted, setIsMounted] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
-    const [isDeleting, setIsDeleting] = useState(false);
     const {onOpen} = useModal();
 
 
@@ -249,7 +248,7 @@ export const ChatItem = ({
           <ActionTooltip label="Delete">
             <Trash
               onClick={() =>
-                onOpen("members", {
+                onOpen("deleteMessage", {
                   apiUrl: `${socketUrl}/${id}`,
                   query: socketQuery,
                 })
