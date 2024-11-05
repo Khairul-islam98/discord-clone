@@ -13,10 +13,11 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Check, Copy, RefreshCw } from "lucide-react";
 import { useOrigin } from "@/hooks/use-origin";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 export const InviteModal = () => {
+  
   const { onOpen, isOpen, onClose, type, data } = useModal();
   const origin = useOrigin();
 
@@ -26,6 +27,7 @@ export const InviteModal = () => {
 
   const [copied, setCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   const inviteUrl = `${origin}/invite/${server?.inviteCode}`;
 
@@ -50,6 +52,11 @@ export const InviteModal = () => {
       setIsLoading(false);
     }
   };
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
@@ -68,6 +75,7 @@ export const InviteModal = () => {
               disabled={isLoading}
               className="bg-zinc-300/50 border-0 focus:visible:ring-0 text-black focus-visible:ring-offset-0"
               value={inviteUrl}
+              readOnly
             />
             <Button
             disabled={isLoading}
