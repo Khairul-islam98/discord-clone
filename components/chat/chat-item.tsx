@@ -95,7 +95,7 @@ export const ChatItem = ({
             url: `${socketUrl}/${id}`,
             query: socketQuery
         })
-        await axios.put(url, values);
+        await axios.patch(url, values);
 
        }catch(error){
         console.log(error);
