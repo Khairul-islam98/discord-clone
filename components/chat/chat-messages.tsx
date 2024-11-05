@@ -8,6 +8,7 @@ import { Fragment, useRef, ElementRef } from "react";
 import { ChatItem } from "./chat-item";
 import { format } from "date-fns";
 import { useChatSocket } from "@/hooks/use-chat-socket";
+import { useChatScroll } from "@/hooks/use-chat-scroll";
 
 const DATE_FORMAT = "d MMM yyyy, HH:mm";
 
@@ -55,6 +56,14 @@ export const ChatMessages = ({
       paramValue,
     });
   useChatSocket({ queryKey, addKey, updatekey });
+  useChatScroll({
+    chatRef,
+    bottomRef,
+    loadMore: fetchNextPage,
+    shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
+    count: data?.pages?.[0]?.items?.length ?? 0,
+    
+  });
 
   if (status === "pending") {
     return (
@@ -84,15 +93,14 @@ export const ChatMessages = ({
         <div className="flex justify-center">
           {isFetchingNextPage ? (
             <Loader2 className="h-6 w-6 animate-spin text-zinc-500 my-4 " />
-          ): (
+          ) : (
             <button
-            onClick={() => fetchNextPage()}
-            className="text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 text-xs my-4 transition"
+              onClick={() => fetchNextPage()}
+              className="text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 text-xs my-4 transition"
             >
               Load previous messages
             </button>
-          )
-        }
+          )}
         </div>
       )}
       <div className="flex flex-col-reverse mt-auto">
