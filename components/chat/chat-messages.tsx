@@ -10,7 +10,7 @@ import { format } from "date-fns";
 
 const DATE_FORMAT = "d MMM yyyy, HH:mm";
 
-type MessageWithMemberWithProfilr = Message & {
+type MessageWithMemberWithProfile = Message & {
   member: Member & {
     profile: Profile;
   };
@@ -74,17 +74,17 @@ export const ChatMessages = ({
       <div className="flex flex-col-reverse mt-auto">
         {data?.pages.map((group, i) => (
           <Fragment key={i}>
-            {group.items.map((message: MessageWithMemberWithProfilr) => (
+            {group.items.map((message: MessageWithMemberWithProfile) => (
               <ChatItem
-                key={message?.id}
-                id={message?.id}
+                key={message.id}
+                id={message.id}
                 currentMember={member}
-                content={message?.content}
-                member={message?.member}
-                fileUrl={message?.fileUrl}
-                deleted={message?.deleted}
-                timestamp={format(new Date(message?.createdAt), DATE_FORMAT)}
-                isUpdated={message?.updatedAt !== message?.createdAt}
+                content={message.content}
+                member={message.member}
+                fileUrl={message.fileUrl}
+                deleted={message.deleted}
+                timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
+                isUpdated={message.updatedAt !== message?.createdAt}
                 socketUrl={socketUrl}
                 socketQuery={socketQuery}
               />

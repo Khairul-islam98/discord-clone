@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body cz-shortcut-listen className={cn( font.className,
+        <body  className={cn( font.className,
           "bg-white dark:bg-[#313338]"
         )}>
           <ThemeProvider
