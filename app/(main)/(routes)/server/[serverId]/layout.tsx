@@ -2,25 +2,33 @@ import { ServerSidebar } from "@/components/server/server-sidebar";
 import { currentProfle } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { RedirectToSignIn } from "@clerk/nextjs";
+
 import { redirect } from "next/navigation";
 
-const serverIdLayout = async ({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: { serverId: string };
-}) => {
+const serverIdLayout = async (
+  props: {
+    children: React.ReactNode;
+    params: Promise<{ serverId: string }>;
+  }
+) => {
+  const params = await props.params;
+
+  const {
+    children
+  } = props;
+
   const profile = await currentProfle();
   if (!profile) {
     return RedirectToSignIn({ redirectUrl: "/sign-in" });
   }
+
+
   const server = await db.server.findUnique({
     where: {
       id: params.serverId,
       members: {
         some: {
-          profileId: profile?.id,
+          profileId: profile.id,
         },
       },
     },
