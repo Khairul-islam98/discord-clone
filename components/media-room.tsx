@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import {LiveKitRoom, VideoConference} from "@livekit/components-react";
 
+
 import '@livekit/components-styles';
 
 import { Channel } from "@prisma/client";
@@ -33,7 +34,7 @@ export const MediaRoom = ({ chatId, video, audio }: MediaRoomProps) => {
             }catch(error){
                 console.error(error)
             }
-        })
+        })()
     },[user.user?.firstName, user.user?.lastName, chatId])
     if (token === '') {
         return (
