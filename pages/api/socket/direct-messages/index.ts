@@ -64,11 +64,7 @@ export default async function handler(
     if (!member) {
       return res.status(404).json({ message: "Member not found" });
     }
-<<<<<<< HEAD
     const directMessage = await db.directMessage.create({
-=======
-    const message = await db.directMessage.create({
->>>>>>> 3f6a3e8b3c3a9e68da59d7f53c0181a241d79790
       data: {
         content,
         fileUrl,
@@ -86,15 +82,9 @@ export default async function handler(
 
     const channelKey = `chat:${conversationId}:messages`;
 
-<<<<<<< HEAD
     res?.socket?.server?.io?.emit(channelKey, directMessage);
 
     return res.status(200).json(directMessage);
-=======
-    res?.socket?.server?.io?.emit(channelKey, message);
-
-    return res.status(200).json(message);
->>>>>>> 3f6a3e8b3c3a9e68da59d7f53c0181a241d79790
   } catch (error) {
     console.log("[DIRECT_MESSAGES_POST]", error);
     return res.status(500).json({ message: "Internal server error" });
