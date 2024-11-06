@@ -61,7 +61,7 @@ export const NavigationSidebar = async () => {
             </div>
         );
     } catch (error) {
-        console.error("Error fetching profile or servers:", error);
+        console.log("Error fetching profile or servers:", error);
         return <div>Error loading sidebar</div>; // Display an error message or fallback UI
     }
 };

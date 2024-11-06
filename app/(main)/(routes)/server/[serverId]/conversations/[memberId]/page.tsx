@@ -1,3 +1,4 @@
+
 import { ChatHeader } from "@/components/chat/chat-header";
 import { ChatInput } from "@/components/chat/chat-input";
 import { ChatMessages } from "@/components/chat/chat-messages";
@@ -9,16 +10,19 @@ import { RedirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 interface MemberIdPageProps {
-  params: {
+  params: Promise<{
     serverId: string;
     memberId: string;
-  },
-  searchParams: {
+  }>,
+  searchParams: Promise<{
     video?: boolean;
-  };
+  }>
 }
 
-const MemberIdPage = async ({params, searchParams}: MemberIdPageProps) => {
+const MemberIdPage = async (props: MemberIdPageProps) => {
+
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   
   const profile = await currentProfle();
   if (!profile) {
@@ -45,7 +49,7 @@ const MemberIdPage = async ({params, searchParams}: MemberIdPageProps) => {
   }
   const { memberOne, memberTwo } = conversation;
   const otherMember =
-    memberOne.profileId === profile.id ? memberTwo : memberOne;
+    memberOne.profile.id === profile.id ? memberTwo : memberOne;
   return (
     <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
       <ChatHeader

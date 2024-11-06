@@ -21,6 +21,7 @@ interface MediaRoomProps {
 export const MediaRoom = ({ chatId, video, audio }: MediaRoomProps) => {
     const user = useUser();
     const [token, setToken] = useState("")
+    
     useEffect(() => {
         if (!user.user?.firstName || !user.user.lastName) return;
         
