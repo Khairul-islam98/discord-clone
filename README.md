@@ -16,6 +16,23 @@ This is a Discord clone built using Next.js.
 - [Screenshots](#screenshots)
 - [Contact](#contact)
 
+## Technologies Used
+
+- Nextjs
+- Axios
+- TanStack Query
+- Clark
+- Typescript
+- Tailwind css
+- Shadcn
+- uploadthing
+- socket-io
+- query-string
+- prisma
+- livekit
+
+
+
 ## Installation
 
 To install the project, follow these steps:
